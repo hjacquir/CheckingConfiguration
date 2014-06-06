@@ -1,0 +1,12 @@
+{
+    "require": {
+        "phpunit/phpunit": "3.*"
+    },
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-0": {
+            "Hj\\": "src/",
+            "Hj\\Tests\\": "tests/"
+        }
+    }
+}
