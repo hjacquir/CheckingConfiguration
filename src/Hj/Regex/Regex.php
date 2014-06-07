@@ -11,14 +11,14 @@ use Hj\Matchable\Browser;
 /**
  * The Regex will set browser version from the expression searching the term when it is defined in the agent
  */
-abstract class Regex
+interface Regex
 {
     /**
      * The expression used in the preg_match function
      *
      * @return string
      */
-    abstract public function getExpression();
+    public function getExpression();
 
     /**
      * Set the browser version if the right expression is matched
@@ -26,5 +26,5 @@ abstract class Regex
      * @param Browser $browser
      * @param array   $matches
      */
-    abstract public function setBrowserVersion(Browser $browser, Array $matches);
+    public function setBrowserVersion(Browser $browser, Array $matches);
 }

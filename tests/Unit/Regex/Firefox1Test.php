@@ -32,7 +32,7 @@ class Firefox1Test extends UnitTestCase
 
     public function testGetExpressionShouldReturnTheCorrectExpression()
     {
-       $this->assertSame('/Firefox[\/ \(]([^ ;\)]+)/i', $this->regex->getExpression());
+        $this->assertSame('/Firefox[\/ \(]([^ ;\)]+)/i', $this->regex->getExpression());
     }
 
     public function testShouldSetTheBrowserVersion()
@@ -40,9 +40,11 @@ class Firefox1Test extends UnitTestCase
         $matches = array('foo14', 'versionBar');
 
         $browser = $this->hjGetMockBrowser();
+        $browser
+            ->expects($this->once())
+            ->method('setVersion')
+            ->with($matches[1]);
 
         $this->regex->setBrowserVersion($browser, $matches);
-
-        $this->assertSame('versionBar', $browser->getVersion());
     }
 }

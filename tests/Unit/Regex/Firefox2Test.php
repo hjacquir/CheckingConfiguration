@@ -38,10 +38,11 @@ class Firefox2Test extends UnitTestCase
     public function testShouldSetTheBrowserVersion()
     {
         $browser = $this->hjGetMockBrowser();
+        $browser
+            ->expects($this->once())
+            ->method('setVersion')
+            ->with('');
 
         $this->regex->setBrowserVersion($browser, array());
-
-        $this->assertSame('', $browser->getVersion());
     }
-
 }

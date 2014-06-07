@@ -18,6 +18,14 @@ class UnitTestCase extends PHPUnit_Framework_TestCase
     /**
      * @param Object $object
      */
+    protected function hjAssertInstanceOfMatchable($object)
+    {
+        $this->assertInstanceOf('\Hj\Matchable\Matchable', $object);
+    }
+
+    /**
+     * @param Object $object
+     */
     protected function hjAssertInstanceOfBrowser($object)
     {
         $this->assertInstanceOf('\Hj\Matchable\Browser', $object);
@@ -60,7 +68,7 @@ class UnitTestCase extends PHPUnit_Framework_TestCase
      */
     protected function hjGetMockRegex()
     {
-        return $this->getMockForAbstractClass('\Hj\Regex\Regex');
+        return $this->getMockBuilder('\Hj\Regex\Regex')->getMock();
     }
 
     /**
@@ -68,7 +76,7 @@ class UnitTestCase extends PHPUnit_Framework_TestCase
      */
     protected function hjGetMockBrowser()
     {
-        return $this->getMockForAbstractClass('\Hj\Matchable\Browser');
+        return $this->getMockBuilder('\Hj\Matchable\Browser')->getMock();
     }
 
     /**
@@ -76,7 +84,7 @@ class UnitTestCase extends PHPUnit_Framework_TestCase
      */
     protected function hjGetMockMatchable()
     {
-        return $this->getMockForAbstractClass('\Hj\Matchable\Matchable');
+        return $this->getMockBuilder('\Hj\Matchable\Matchable')->getMock();
     }
 
     /**
@@ -84,7 +92,7 @@ class UnitTestCase extends PHPUnit_Framework_TestCase
      */
     protected function hjGetMockAgent()
     {
-        return $this->getMockForAbstractClass('\Hj\Agent');
+        return $this->getMockBuilder('\Hj\Agent')->disableOriginalConstructor()->getMock();
     }
 
     /**

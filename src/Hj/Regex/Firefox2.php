@@ -11,7 +11,7 @@ use Hj\Matchable\Browser;
 /**
  * Firefox2 Regex
  */
-class Firefox2 extends Regex
+class Firefox2 implements Regex
 {
     /**
      * The expression used in the preg_match function
