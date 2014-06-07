@@ -12,7 +12,7 @@ namespace Hj\Engine;
 interface Engine
 {
     /**
-     * Teh engine name
+     * The engine name
      *
      * @return string
      */
