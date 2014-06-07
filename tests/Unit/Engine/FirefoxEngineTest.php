@@ -31,6 +31,6 @@ class FirefoxEngineTest extends UnitTestCase
 
     public function testShouldGetName()
     {
-        $this->assertSame('Gecko', $this->engine->getName());
+        $this->assertSame('Firefox', $this->engine->getName());
     }
 }
