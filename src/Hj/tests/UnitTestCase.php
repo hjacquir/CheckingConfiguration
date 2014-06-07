@@ -66,6 +66,14 @@ class UnitTestCase extends PHPUnit_Framework_TestCase
     /**
      * @return PHPUnit_Framework_MockObject_MockObject
      */
+    protected function hjGetMockMatcher()
+    {
+        return $this->getMockBuilder('\Hj\Matcher\Matcher')->getMock();
+    }
+
+    /**
+     * @return PHPUnit_Framework_MockObject_MockObject
+     */
     protected function hjGetMockRegex()
     {
         return $this->getMockBuilder('\Hj\Regex\Regex')->getMock();
