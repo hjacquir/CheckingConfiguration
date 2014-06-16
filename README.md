@@ -7,6 +7,11 @@ Determine your browser, platform and operating system information from the http 
 Supported browsers until today
 ===============================
 * Firefox
+* Google Chrome
+
+Supported platforms until today
+===============================
+* Linux
 
 Usage
 ==========================
