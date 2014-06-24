@@ -16,6 +16,14 @@ use ReflectionClass;
 class UnitTestCase extends PHPUnit_Framework_TestCase
 {
     /**
+     * @param $object
+     */
+    protected function hjAssertInstanceOfRegexStrategy($object)
+    {
+        $this->assertInstanceOf('\Hj\Regex\Strategy\RegexStrategy', $object);
+    }
+
+    /**
      * @param Object $object
      */
     protected function hjAssertInstanceOfMatchable($object)
