@@ -10,6 +10,9 @@ use Hj\Matchable\Browser;
 
 /**
  * Firefox2 Regex
+ *
+ * @deprecated
+ * @todo remove
  */
 class Firefox2 implements Regex
 {

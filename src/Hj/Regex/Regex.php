@@ -10,6 +10,9 @@ use Hj\Matchable\Browser;
 
 /**
  * The Regex will set browser version from the expression searching the term when it is defined in the agent
+ *
+ * @deprecated
+ * @todo remove
  */
 interface Regex
 {
