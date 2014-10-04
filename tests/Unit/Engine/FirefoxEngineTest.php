@@ -7,6 +7,7 @@
 namespace Hj\Tests\Unit\Engine;
 
 use Hj\Engine\FirefoxEngine;
+use Hj\Matchable\Firefox;
 use Hj\tests\UnitTestCase;
 
 /**
@@ -31,6 +32,6 @@ class FirefoxEngineTest extends UnitTestCase
 
     public function testShouldGetName()
     {
-        $this->assertSame('Firefox', $this->engine->getName());
+        $this->assertSame(Firefox::NAME, $this->engine->getName());
     }
 }

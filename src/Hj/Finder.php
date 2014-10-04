@@ -60,10 +60,12 @@ class Finder
         }
 
         foreach ($this->matchers as $matcher) {
-            $matchable = $matcher->match($this->agent);
+            $matchables = $matcher->match($this->agent);
 
-            if (null !== $matchable) {
-                $this->matchables[] = $matchable;
+            foreach ($matchables as $matchable) {
+                if (null !== $matchable) {
+                    $this->matchables[] = $matchable;
+                }
             }
         }
 

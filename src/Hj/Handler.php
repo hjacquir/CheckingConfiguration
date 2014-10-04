@@ -11,13 +11,10 @@ use Hj\Engine\FirefoxEngine;
 use Hj\Matchable\Browser;
 use Hj\Matchable\Firefox;
 use Hj\Matchable\GoogleChrome;
-use Hj\Matchable\Linux;
 use Hj\Matchable\Platform;
-use Hj\Matcher\ChromeMatcher;
-use Hj\Matcher\FirefoxMatcher;
-use Hj\Matcher\PlatformMatcher;
-use Hj\Regex\Firefox1;
-use Hj\Regex\Firefox2;
+use Hj\Matcher\BrowserMatcher;
+use Hj\Regex\FirefoxRegexMatcher1;
+use Hj\Regex\FirefoxRegexMatcher2;
 
 /**
  * Handler
@@ -29,28 +26,26 @@ class Handler
     public static function output()
     {
         //Matchables - Browser
-        $firefox = new Firefox();
+        $firefox = new Firefox(true);
         $firefox->addEngine(new FirefoxEngine());
-        $firefox->addRegex(new Firefox1());
-        $firefox->addRegex(new Firefox2());
+        $firefox->addRegex(new FirefoxRegexMatcher1());
+        $firefox->addRegex(new FirefoxRegexMatcher2());
+
         $chrome = new GoogleChrome();
         $chrome->addEngine(new ChromeEngine());
 
         //Matchers
-        $firefoxMatcher = new FirefoxMatcher($firefox);
-        $chromeMatcher = new ChromeMatcher($chrome);
-
-        $platformMatcher = new PlatformMatcher();
-        $platformMatcher->addPlatform(new Linux());
+        $browserMatcher = new BrowserMatcher();
+        $browserMatcher->addMatchable($firefox);
+        $browserMatcher->addMatchable($chrome);
 
         // the http agent
         $agent = new Agent();
 
         // Finder
         $finder = new Finder($agent);
-        $finder->addMatcher($firefoxMatcher);
-        $finder->addMatcher($chromeMatcher);
-        $finder->addMatcher($platformMatcher);
+        $finder->addMatcher($browserMatcher);
+
 
         try {
             // find the matchables
@@ -65,10 +60,6 @@ class Handler
 
                 if ($matchable instanceof Browser) {
                     echo 'Browser : ';
-                }
-
-                if ($matchable instanceof Platform) {
-                    echo 'Platform : ';
                 }
 
                 echo $matchable->getName();

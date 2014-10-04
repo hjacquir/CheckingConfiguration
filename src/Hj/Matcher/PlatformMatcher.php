@@ -52,4 +52,12 @@ class PlatformMatcher implements Matcher
 
         return $platform;
     }
+
+    /**
+     * @param Matchable $matchable
+     */
+    public function addMatchable(Matchable $matchable)
+    {
+        throw new \RuntimeException(__CLASS__ . "::" . "addMatchable() is not implemented.");
+    }
 }

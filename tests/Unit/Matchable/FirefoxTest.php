@@ -40,11 +40,6 @@ class FirefoxTest extends UnitTestCase
         $this->assertSame('Firefox', $this->browser->getName());
     }
 
-    public function testHasRegexShouldReturnTrue()
-    {
-        $this->assertTrue($this->browser->hasRegex());
-    }
-
     public function testShouldBeAbleToAddEngines()
     {
         $this->assertCount(0, $this->browser->getEngines());
@@ -59,31 +54,5 @@ class FirefoxTest extends UnitTestCase
         $this->browser->addEngine($engine);
 
         $this->hjAssertIfTheArrayHasKeyAndValue($this->browser->getEngines(), 0, $engine);
-    }
-
-    public function testShouldBeAbleToAddRegexs()
-    {
-        $this->assertCount(0, $this->browser->getRegexs());
-        $this->browser->addRegex($this->hjGetMockRegex());
-        $this->assertCount(1, $this->browser->getRegexs());
-    }
-
-    public function testShouldGetRegexs()
-    {
-        $regex = $this->hjGetMockRegex();
-
-        $this->browser->addRegex($regex);
-
-        $this->hjAssertIfTheArrayHasKeyAndValue($this->browser->getRegexs(), 0, $regex);
-    }
-
-    public function testShoulGetAndSetVersion()
-    {
-        $this->hjAssertThatObjectHaveGetAndSetMethods($this->browser, 'version', 'foo12');
-    }
-
-    public function testShouldHaveRegex()
-    {
-        $this->assertTrue($this->browser->hasRegex());
     }
 }

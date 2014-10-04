@@ -8,116 +8,48 @@ namespace Hj\Matcher;
 
 use Exception;
 use Hj\Agent;
-use Hj\Engine\Engine;
-use Hj\Matchable\Browser;
 use Hj\Matchable\Matchable;
 
 /**
  * Class BrowserMatcher
- *
- * @todo Refactor
  */
-abstract class BrowserMatcher implements Matcher
+class BrowserMatcher implements Matcher
 {
     /**
-     * The Browser
-     *
-     * @var Browser
+     * @var Matchable[]
      */
-    protected $browser;
+    private $matchables = array();
 
     /**
-     * @param Browser $browser
+     * @var Matchable[]
      */
-    public function __construct(Browser $browser)
-    {
-        $this->browser = $browser;
-    }
+    private $matched = array();
 
     /**
      * @param Agent $agent
      *
-     * @return Matchable|null
+     * @return \Hj\Matchable\Matchable[]
      *
      * @throws \Exception
      */
     public function match(Agent $agent)
     {
-        $browser = null;
-
-        $engines = $this->browser->getEngines();
-
-        if (empty($engines)) {
-            throw new \Exception("You must provide engines for the browser {$this->browser->getName()}");
+        if (true === empty($this->matchables)) {
+            throw new \Exception('The browser matcher is empty you must add browser');
         }
 
-        foreach ($engines as $engine) {
-
-            if (false !== stripos($agent->getHttpUserAgent(), $engine->getName())) {
-                $browser = $this->browser;
-                $this->setVersion($agent, $engine);
-            }
+        foreach ($this->matchables as $matchable) {
+            $this->matched[] = $matchable->occur($agent);
         }
 
-        return $browser;
+        return $this->matched;
     }
 
     /**
-     * The matcher set the browser version
-     *
-     * @param Agent  $agent
-     * @param Engine $engine
+     * @param Matchable $matchable
      */
-    private function setVersion(Agent $agent, Engine $engine)
+    public function addMatchable(Matchable $matchable)
     {
-        if ($this->browser->hasRegex()) {
-            $this->setVersionWithRegex($agent);
-        } else {
-            $this->setVersionWithoutRegex($agent, $engine);
-        }
+        $this->matchables[] = $matchable;
     }
-
-    /**
-     * @param Agent $agent
-     *
-     * @throws \Exception
-     */
-    private function setVersionWithRegex(Agent $agent)
-    {
-        $regexs = $this->browser->getRegexs();
-
-        if (empty($regexs)) {
-            throw new \Exception("You must provide the regexs for the browser {$this->browser->getName()}");
-        }
-
-        foreach ($regexs as $regex) {
-
-            if (preg_match($regex->getExpression(), $agent->getHttpUserAgent(), $matches)) {
-                $regex->setBrowserVersion($this->browser, $matches);
-            }
-        }
-    }
-
-    /**
-     * Behavior used by the matcher to set the version when the browser do not have regex
-     *
-     * @param Agent  $agent
-     * @param Engine $engine
-     */
-    private function setVersionWithoutRegex(Agent $agent, Engine $engine)
-    {
-        $version = $this->matchVersionWithoutRegex($agent, $engine);
-
-        $this->browser->setVersion($version);
-    }
-
-    /**
-     * Behavior used by the matcher to return the version when the browser do not use regex
-     *
-     * @param Agent  $agent
-     * @param Engine $engine
-     *
-     * @return string
-     */
-    abstract protected function matchVersionWithoutRegex(Agent $agent, Engine $engine);
 }

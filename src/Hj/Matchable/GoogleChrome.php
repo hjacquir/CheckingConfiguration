@@ -6,6 +6,7 @@
 
 namespace Hj\Matchable;
 
+use Hj\Agent;
 use Hj\Engine\Engine;
 use Hj\Regex\Regex;
 
@@ -15,95 +16,36 @@ use Hj\Regex\Regex;
  *
  * @todo Add unit test
  */
-class GoogleChrome implements Browser
+class GoogleChrome extends Browser
 {
-    /**
-     * @var string
-     */
-    private $version = 'Unknown';
+    const NAME = 'Google chrome';
 
     /**
-     * @var array
-     */
-    private $engines;
-
-    /**
-     * Add regex to the browser
-     *
-     * @param Regex $regex
-     */
-    public function addRegex(Regex $regex)
-    {
-        throw new \RuntimeException(__CLASS__ . "::" . "addRegex() is not implemented.");
-    }
-
-    /**
-     * Return all regexs supported by the browser
-     *
-     * @return array
-     */
-    public function getRegexs()
-    {
-        throw new \RuntimeException(__CLASS__ . "::" . "getRegexs() is not implemented.");
-    }
-
-    /**
-     * Add engine to the browser
-     *
+     * @param Agent $agent
      * @param Engine $engine
-     */
-    public function addEngine(Engine $engine)
-    {
-        $this->engines[] = $engine;
-    }
-
-    /**
-     * Return all engines supported by the browser
-     *
-     * @return array
-     */
-    public function getEngines()
-    {
-        return $this->engines;
-    }
-
-    /**
-     * Set the browser version.
-     *
-     * @param string $version
-     */
-    public function setVersion($version)
-    {
-        $this->version = $version;
-    }
-
-    /**
-     * Returns the browser version.
      *
      * @return string
      */
-    public function getVersion()
+    protected function matchVersionWithoutRegex(Agent $agent, Engine $engine)
     {
-        return $this->version;
+        $version = array(
+            $this->getVersion(),
+        );
+
+        $result = explode('/', stristr($agent->getHttpUserAgent(), $engine->getName()));
+
+        if (isset($result[1])) {
+            $version = explode(' ', $result[1]);
+        }
+
+        return $version[0];
     }
 
     /**
-     * Return true if the browser use regex to match his version
-     *
-     * @return boolean
-     */
-    public function hasRegex()
-    {
-        return false;
-    }
-
-    /**
-     * Return the matchable name
-     *
      * @return string
      */
     public function getName()
     {
-        return 'Google Chrome';
+        return self::NAME;
     }
 }

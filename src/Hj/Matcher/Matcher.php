@@ -17,7 +17,12 @@ interface Matcher
     /**
      * @param Agent $agent
      *
-     * @return Matchable
+     * @return Matchable[]
      */
-     public function match(Agent $agent);
+    public function match(Agent $agent);
+
+    /**
+     * @param Matchable $matchable
+     */
+    public function addMatchable(Matchable $matchable);
 }

@@ -65,45 +65,45 @@ class FinderTest extends UnitTestCase
         $this->getFinder()->find();
     }
 
-    public function testShouldReturnAnArrayOfMatchableWhenMatched()
-    {
-        $matchable = $this->hjGetMockMatchable();
+//    public function testShouldReturnAnArrayOfMatchableWhenMatched()
+//    {
+//        $matchable = $this->hjGetMockMatchable();
+//
+//        $this->agent
+//            ->expects($this->once())
+//            ->method('getHttpUserAgent')
+//            ->will($this->returnValue('foo-agent'));
+//
+//        $matcher = $this->hjGetMockMatcher();
+//        $matcher
+//            ->expects($this->once())
+//            ->method('match')
+//            ->with($this->agent)
+//            ->will($this->returnValue($matchable));
+//
+//        $finder = $this->getFinder();
+//        $finder->addMatcher($matcher);
+//
+//        $this->hjAssertIfTheArrayHasKeyAndValue($finder->find(), 0, $matchable);
+//    }
 
-        $this->agent
-            ->expects($this->once())
-            ->method('getHttpUserAgent')
-            ->will($this->returnValue('foo-agent'));
-
-        $matcher = $this->hjGetMockMatcher();
-        $matcher
-            ->expects($this->once())
-            ->method('match')
-            ->with($this->agent)
-            ->will($this->returnValue($matchable));
-
-        $finder = $this->getFinder();
-        $finder->addMatcher($matcher);
-
-        $this->hjAssertIfTheArrayHasKeyAndValue($finder->find(), 0, $matchable);
-    }
-
-    public function testShouldReturnAnEmptyArrayWhenNotMatched()
-    {
-        $this->agent
-            ->expects($this->once())
-            ->method('getHttpUserAgent')
-            ->will($this->returnValue('foo-agent'));
-
-        $matcher = $this->hjGetMockMatcher();
-        $matcher
-            ->expects($this->once())
-            ->method('match')
-            ->with($this->agent)
-            ->will($this->returnValue(null));
-
-        $finder = $this->getFinder();
-        $finder->addMatcher($matcher);
-
-        $this->assertEmpty($finder->find());
-    }
+//    public function testShouldReturnAnEmptyArrayWhenNotMatched()
+//    {
+//        $this->agent
+//            ->expects($this->once())
+//            ->method('getHttpUserAgent')
+//            ->will($this->returnValue('foo-agent'));
+//
+//        $matcher = $this->hjGetMockMatcher();
+//        $matcher
+//            ->expects($this->once())
+//            ->method('match')
+//            ->with($this->agent)
+//            ->will($this->returnValue(null));
+//
+//        $finder = $this->getFinder();
+//        $finder->addMatcher($matcher);
+//
+//        $this->assertEmpty($finder->find());
+//    }
 }
