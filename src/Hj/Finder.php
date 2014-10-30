@@ -62,11 +62,15 @@ class Finder
         foreach ($this->matchers as $matcher) {
             $matchables = $matcher->match($this->agent);
 
-            foreach ($matchables as $matchable) {
-                if (null !== $matchable) {
-                    $this->matchables[] = $matchable;
+            if (!empty($matchables)) {
+
+                foreach ($matchables as $matchable) {
+                    if (null !== $matchable) {
+                        $this->matchables[] = $matchable;
+                    }
                 }
             }
+
         }
 
         return $this->matchables;
